@@ -16,23 +16,33 @@ The client speaks first to open to connexion.
 
 ### What is the sequence of messages exchanged by the client and the server?
 
-| Client   | Server   |
-| :------- | -------- |
-| SYN      | -        |
-| -        | SYN ACK  |
-| ACK      | -        |
-| Data     | -        |
-| -        | Data ACK |
-| -        | Data     |
-| Data ACK | -        |
-| etc      | etc      |
+Example of sequence :
+
+| Client        | Server   |
+| :------------ | -------- |
+| REQUEST,8,*,8 | -        |
+| -             | REPLY,64 |
+| REQUEST,3,+,3 | -        |
+| -             | REPLY,6  |
+| STOP          | -        |
+| -             | STOP     |
 
 ### What happens when a message is received from the other party?
 
-Send back a Data ACK to inform that the message has been well received and then send the response.
+Parse the message, then execute what to do following our syntax.
 
 ### What is the syntax of the messages? How we generate and parse them?
-The message could be a CSV. Generated with OpenCSV and parsed with Apache Commons CSV.
+Using BufferedInput and BufferedOutput to send and receive the message. Then it could parse it by line.
+
+There 3 types of syntax message :
+
+- REQUEST,operande,operator,operande
+- REPLY,result
+- STOP
+
+Note : if the syntax isn't respected, the party who receive the wrong syntax message close the connexion without feedback message.
 
 ### Who closes the connection and when?
-The server closes the connexion because the server compute (or not) the calculation asked by the client and then closes the connexion by sending a FIN.
+
+The client closes the connexion when he's done with his calculs by sending a STOP.
+
