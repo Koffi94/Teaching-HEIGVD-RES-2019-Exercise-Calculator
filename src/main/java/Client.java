@@ -30,7 +30,7 @@ public class Client {
         int newBytes;
 
         try {
-            clientSocket = new Socket("10.192.93.101", 12345);
+            clientSocket = new Socket("172.17.0.2", 12345);
             os = clientSocket.getOutputStream();
             is = clientSocket.getInputStream();
 
