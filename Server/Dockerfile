@@ -4,7 +4,7 @@ MAINTAINER Olivier Koffi <olivier.koffi@heig-vd.ch>
 #
 # When we build the image, we copy the executable jar in the image file system. 
 #
-COPY calulatorClient-1.0-SNAPSHOT.jar /opt/app/client.jar
+COPY target/Server-1.0-SNAPSHOT-launcher.jar /opt/app/server.jar
 
 #
 # Our application will accept TCP connections on port 2205. Note that the EXPOSE statement
@@ -19,4 +19,4 @@ COPY calulatorClient-1.0-SNAPSHOT.jar /opt/app/client.jar
 #
 # This is the command that is executed when the Docker container starts
 #
-CMD ["java", "-jar", "/opt/app/client.jar"]
+#CMD ["java", "-jar", "/opt/app/client.jar"]
